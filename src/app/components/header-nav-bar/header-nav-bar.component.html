@@ -1,0 +1,122 @@
+
+ <nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+    <div class="side-nav-button p-2 me-3 text-light">
+      <i class="fa-solid fa-bars"  (click)="sideNavToggle()"></i>
+    </div>
+ 
+    <a class="navbar-brand">Vision-Classroom</a>
+    
+    <div class="navbar-collapse">
+<!-- for Admin DashBoard only  -->
+        <!-- <ul class="navbar-nav " *ngIf="loggedIn && role=='admin'">
+      <li class="nav-item dropdown  px-4"  >
+           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                   Role List
+           </a>
+           <ul class="dropdown-menu dropdown-menu-dark">
+                <li class="optText"><a class="dropdown-item" href="#">Admin</a></li>
+                <li class="optText"><a class="dropdown-item" href="#">Faculty</a></li>
+                <li class="optText"><a class="dropdown-item" href="#">Student</a></li>
+           </ul>
+      </li>
+      </ul> -->
+
+    <p class="navbar-nav  optText" style="color:grey; text-align:center;padding-left:380px"> "Journey of thousand miles begins with a single Step..."  </p>
+      
+      <!--  <ul class="navbar-nav " *ngIf="loggedIn && role=='admin'">
+      <li class="nav-item dropdown px-4"  >
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Acc Creation
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark">
+             <li class="optText"><a class="dropdown-item" [routerLink]="'/adminCreation'"  >Admin Acc</a></li>
+             <li class="optText"><a class="dropdown-item" [routerLink]="'/facultyCreation'"  >Faculty Acc</a></li> 
+        </ul>
+      </li> 
+      </ul>
+
+      <ul class="navbar-nav " *ngIf="loggedIn && role=='admin'">
+       <li class="nav-item dropdown px-4">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Material
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark">
+             <li class="optText"><a class="dropdown-item" href="#">PPT List</a></li>
+          <li class="optText"><a class="dropdown-item" href="#">Video List</a></li>
+          <li class="optText"><a class="dropdown-item" href="#">Both Lists</a></li>  
+          <li class="optText"><a class="dropdown-item" href="fileUploading">Upload Material</a></li>
+        </ul>
+        </li>
+        </ul> -->
+
+<!-- for Student or Faculty DashBoard only  -->
+      <!-- <ul class="navbar-nav " *ngIf="loggedIn && role=='student' || role=='faculty'">
+        <li class="nav-item dropdown  px-4"  >
+             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Menu 1
+             </a>
+             <ul class="dropdown-menu dropdown-menu-dark">
+                 - <li class="optText"><a class="dropdown-item" href="#">Opt-1</a></li>
+                  <li class="optText"><a class="dropdown-item" href="#">Opt-2</a></li>
+                  <li class="optText"><a class="dropdown-item" href="#">Opt-3</a></li>  
+             </ul>
+        </li>
+        </ul> -->
+
+        
+        <!-- <ul class="navbar-nav " *ngIf="loggedIn && role=='student' || role=='faculty'">
+        <li class="nav-item dropdown px-4"  >
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Menu 2
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark"> 
+           <li class="optText"><a class="dropdown-item" href="#">Opt-1</a></li>
+            <li class="optText"><a class="dropdown-item" href="#">Opt-2</a></li>
+            <li class="optText"><a class="dropdown-item" href="#">Opt-3</a></li>  
+          </ul>
+        </li>
+        </ul> -->
+
+        <!-- <ul class="navbar-nav " *ngIf="loggedIn && role=='student' || role=='faculty'">
+         <li class="nav-item dropdown px-4">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Menu 3
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark"> 
+             <li class="optText"><a class="dropdown-item" href="#">Opt-1</a></li>
+            <li class="optText"><a class="dropdown-item" href="#">Opt-2</a></li>
+            <li class="optText"><a class="dropdown-item" href="#">Opt-3</a></li>  
+          </ul>
+          </li>
+          </ul> -->
+    </div>
+
+    <!-- <form class="d-flex me-5">
+       <input class="form-control me-2" type="search" placeholder="Search">
+       <button class="btn btn-outline-light" type="submit"> Search </button>
+    </form> -->
+
+    <span  >
+          <!-- <a  *ngIf="!loggedIn" style="padding-right: 70px;" mat-icon-button class="stup"  href="/registerStudent">Register</a>  -->
+              
+          <a  *ngIf="!loggedIn" mat-icon-button class="stup" routerLink="login">Login</a>
+
+          <div *ngIf="loggedIn" class="profile-logo dropstart">
+              <button class="btn btn-outline-light dropdown-toggle" style=" text-transform: capitalize;" data-bs-toggle="dropdown">
+                {{name}}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li ><a class="dropdown-item" href="/myProfile">Your Profile</a></li>
+
+                <li *ngIf="role=='admin'"><a class="dropdown-item" href="adminDashboard">DashBoard</a></li>
+                <li *ngIf="role=='faculty'"><a class="dropdown-item" href="facultyDashboard">DashBoard</a></li>
+                <li *ngIf="role =='student'"> <a class="dropdown-item" href="studentDashboard">DashBoard</a></li>
+                <li><a class="dropdown-item" href="#" (click)="logoutUser()">Log Out</a></li>
+              </ul>
+          </div>
+         <!-- <a  mat-icon-button class="stup">{{name}}</a>  -->
+
+
+          <!-- <a *ngIf="loggedIn" class="stup" (click)="logoutUser()">Logout</a> -->
+    </span>
+</nav> 

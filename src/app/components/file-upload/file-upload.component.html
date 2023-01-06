@@ -1,0 +1,209 @@
+<div class="container" style="width: 900px;">
+    <div class="panel panel-defualt">
+        <div class="panel-heading">
+            <h1 style="color:purple;text-align:center ; margin-top: 15px;"> <b>Upload File</b> </h1>
+        </div><br>
+
+
+        <br>
+ 
+
+
+    <div class="panel-body">   
+        
+    
+
+      <strong>Select files from your computer</strong>
+      <div *ngIf="fileStatus.status==='progress'">
+        <div class="progress">
+          <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+              {{ fileStatus.requestType }} {{ fileStatus.percent }} 
+            </div>
+        </div>
+      </div> <hr>
+
+
+
+        <div class="panel-body">
+            <form enctype="multipart/form-data" (ngSubmit)="uploade()" [formGroup]="registerform">
+            <div class="row" style="padding-bottom:20px ;" >
+                <div class="col mb-3">
+                    <label   class="form-label"> Subject </label>
+
+                    <select class="form-control" name="SUBJECT" required formControlName="SUBJECT" [(ngModel)]="subject">
+                        <option value="" disabled selected>Choose Subject</option>
+                        <option *ngFor="let sub of subjectList">
+                             {{sub.subject}}
+                        </option>
+                    </select>
+                    <!-- <input type="text" class="form-control" id="subject" name="SUBJECT" required formControlName="SUBJECT" [(ngModel)]="subject">
+                    <div class="form-text text-danger" *ngIf="Subject.errors?.['required'] && (Subject.touched || Subject.dirty)"> 
+                        Subject is Required
+                    </div>
+                    <div class="form-text text-danger" *ngIf="Subject.errors?.['noSpecialChar'] && (Subject.touched || Subject.dirty)"> 
+                        Special Characters Not allowed
+                    </div>
+                    <div class="form-text text-danger" *ngIf="Subject.errors?.['minlength'] && (Subject.touched || Subject.dirty)"> 
+                        Subject should be more than 2 Characters only 
+                    </div>
+                    <div class="form-text text-danger" *ngIf="Subject.errors?.['pattern'] && (Subject.touched || Subject.dirty)">
+                        Subject Must have only Alphabets
+                    </div> -->
+
+                    <div class="form-text text-danger" *ngIf="Subject.errors?.['required'] && (Subject.touched || Subject.dirty)"> 
+                        Subject is Required
+                    </div>
+                    
+                </div>
+                             
+             </div>
+             
+    
+     
+
+             <div class="row" style="padding-bottom:20px ;" >      
+    
+                <div class="col    mb-3">
+                    <div class="m-1">Type</div>
+                    <div class="form-check form-check-inline">
+                         <input type="radio" class="form-check-input" value="ppt" id="ppt" name="TYPE"  required [(ngModel)]="type" formControlName="TYPE">
+                         <label class="form-check-label" for="ppt">PPT</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" value="video" id="video" name="TYPE"  required  [(ngModel)]="type" formControlName="TYPE">
+                        <label class="form-check-label" for="video">VIDEO</label>
+                   </div>
+                   <div class="form-text text-danger" *ngIf="Type.errors?.['required'] && ( Type.touched || Type.dirty)">
+                      Type is required
+                    </div>
+                 
+                </div>
+            </div>
+    
+
+           
+                <fieldset>
+                     <strong> Choose File  </strong>
+
+                <div class="row form-group">
+                    <div class="col mb-3">
+                        <div *ngIf="type==''" >
+                            <input type="text" class="form-control" readonly placeholder="Choose First Type" >
+                        </div>
+
+                        <div *ngIf="type=='ppt'">
+                                <input type="file" (change)="onUploadFile($event)" name="FILE"  id="file" class="form-control" formControlName="FILE"
+                                   accept="application/msword,   application/vnd.ms-powerpoint,text/plain ,  application/pdf, " >
+                        </div> 
+                        
+                        <div *ngIf="type=='video'" >
+                                <input type="file" (change)="onUploadFile($event)" name="FILE"  id="file" class="form-control" formControlName="FILE"
+                                    accept="video/* " >
+                        </div> 
+
+                             <div class="form-text text-danger" *ngIf="File.errors?.['required'] && ( File.touched || File.dirty)">
+                                File required
+                              </div>
+                              <div class="form-text text-danger" *ngIf="File.errors?.['minLength'] && ( File.touched || File.dirty)"> 
+                                Min chars 15 only
+                            </div>
+                    </div>
+
+                </div>
+
+            </fieldset> <br> <br>
+
+            <div class="row" style="text-align: center;">
+                <div class="">
+                    <div>
+                        <button  class="btn btn-primary"  type="submit" [disabled]="registerform.invalid" >Upload</button> &nbsp;&nbsp;
+                        <button  type="reset" class="btn btn" style="background-color:orangered;color: white;">Reset</button> &nbsp;&nbsp;
+                        <button  class="btn btn-warn" style="background-color:red;color: white;"  (click)="toDashBoard()" >Cancel</button>
+                    </div>
+                </div>
+            </div>
+             </form>
+
+
+             <br>  
+      
+             <!-- <div *ngIf="filenames.length > 0" class="js-upload-finished">
+               <h3>Processed files</h3>
+               <div *ngFor="let filename of filenames" class="list-group">
+                  <a (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;"> 
+                   {{ filename }}            
+                   <a class="alert-success float-right">Download</a>
+                       </a><br>  
+               </div> 
+             </div>-->
+
+
+        </div>
+    </div>
+</div>
+
+<!-- 
+   <div class="container" style="align-items: center;padding-top: 150px;">
+    <form [formGroup]="registerform" (ngSubmit)="registerSubmited(registerform)"   >
+        <div class="sm-jumbotron"> 
+            <div class="row" style="padding-bottom:20px ;" >
+               <div class="col text-left p-2 mb-3 bg-light">
+                    <h1 class="fs-3" > File Uploading</h1>
+               </div>
+             
+            </div>
+            
+            <div class="row" style="padding-bottom:20px ;" >
+               <div class="col mb-3">
+                   <label for="firstname" class="form-label"> Subject </label>
+                   <input type="text" class="form-control" id="subject" formControlName="subject" [(ngModel)]="subject">
+                    
+               </div>              
+            </div>
+            
+   
+   
+   
+            <div class="row" style="padding-bottom:20px ;" >      
+   
+               <div class="col    mb-3">
+                   <div class="m-1">Type</div>
+                   <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" value="ppt" id="ppt" formControlName="type" [(ngModel)]="type">
+                        <label class="form-check-label" for="ppt">PPT</label>
+                   </div>
+                   <div class="form-check form-check-inline">
+                       <input type="radio" class="form-check-input" value="video" id="video" formControlName="type" [(ngModel)]="type">
+                       <label class="form-check-label" for="video">VIDEO</label>
+                  </div>
+   
+               </div>
+           </div>
+   
+   
+           <div class="row">
+            <div class="col mb-3">
+               <label  for="file" class="form-label"> Choose File</label>
+               <!- <input type="file" class="form-control" id="file" formControlName="filess" [(ngModel)]="fileObj.multipartFile">  
+               <!-  <input type="file" class="form-control" id="filess"  (change)="onSelectFile($event)">  
+                
+            </div> 
+
+           </div>   
+   
+    
+   
+               <div class="row">
+                   <div class="col-6 offset-5">
+                       
+                                <div>
+                                   <button  class="btn btn-primary"  type="submit" [disabled]="registerform.invalid">Upload</button> &nbsp;&nbsp;
+                                   <button  type="reset " class="btn btn-primary" style="background-color:orangered;">Reset</button>
+                                </div>
+                              
+                   </div>
+               </div>
+               
+            </div>  
+    </form>
+   </div>   -->

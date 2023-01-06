@@ -1,0 +1,751 @@
+
+
+
+<div class="container bootstrap-wrapper " style="padding-top: 60px;padding-left: 100px;width: 100%;" >
+  <h1 style="width: 1400px;color:purple"><b> Welcome to Admin Panel</b></h1>
+  
+      <div style="float: left;"  >
+        <ul >
+          <li class="nav-item dropdown  px-4"  >
+            <button class="btn btn-info   dropdown-toggle" style="text-align:left;" role="button" data-bs-toggle="dropdown">
+                       Role List
+               </button>
+               <ul class="dropdown-menu dropdown-menu-dark">
+                    <li class="optText"><button class="dropdown-item" (click)="getAllAdmins()"  >Admin</button></li>
+                    <li class="optText"><button class="dropdown-item" (click)="getAllFaculties()" >Faculty</button></li>
+                    <li class="optText"><button class="dropdown-item" (click)="getAllStudents()" >Student</button></li>
+               </ul>
+          </li>
+          </ul>
+    
+          <ul >
+            <li class="nav-item dropdown  px-4"  >
+              <button class="btn btn-info   dropdown-toggle" style="text-align:left;" role="button" data-bs-toggle="dropdown">
+                         Material List
+                 </button>
+                 <ul class="dropdown-menu dropdown-menu-dark">
+                      <li class="optText"><button class="dropdown-item" (click)="getAllFiles('ppt')"  >PPT List</button> </li>
+                      <li class="optText">  <button class="dropdown-item" (click)="getAllFiles('video')"  >Video List </button></li>
+                      <li class="optText">  <button class="dropdown-item" (click)="getAllFiles('bothTypes')"  >Both List </button></li>
+                      
+                 </ul>
+            </li>
+            </ul>
+      </div>
+
+
+      <div style="float: left;" >
+            <ul >
+              <li class="nav-item dropdown  px-4"  >
+                <button class="btn btn-info   dropdown-toggle" style="text-align:left;" role="button" data-bs-toggle="dropdown">
+                           Create User
+                   </button>
+                   <ul class="dropdown-menu dropdown-menu-dark">
+                        <li class="optText"><button class="dropdown-item" [routerLink]="'/adminCreation'"  >Admin</button> </li>
+                        <li class="optText">  <button class="dropdown-item" [routerLink]="'/facultyCreation'"  >Faculty </button></li>
+                   </ul>
+              </li>
+              </ul>
+
+              <ul >
+                <li class="nav-item dropdown  px-4"  >
+                  <button class="btn btn-info   dropdown-toggle" style="text-align:left;" role="button" data-bs-toggle="dropdown">
+                             Subject
+                     </button>
+                     <ul class="dropdown-menu dropdown-menu-dark">
+                          <li class="optText"><button class="dropdown-item" (click)="activateSubjectStore()"  >Add Subject</button> </li>
+                          <li class="optText">  <button class="dropdown-item" (click)="getAllSubjects()"  >Subject List </button></li>
+                     </ul>
+                </li>
+                </ul>
+
+      </div>
+
+ 
+
+    <div style="  margin-left: 100px;padding-left: 250px;  ">
+
+        <!-- <button class="btn btn-info" (click)="getAllAdmins()" type="button"> Admin List </button>
+        <button class="btn btn-info" (click)="getAllFaculties()" type="button">Faculty List </button> 
+        <button class="btn btn-info" (click)="getAllStudents()" type="button">Student List</button> -->
+        <button class="btn btn-info" (click)="getAllQuestionList()" type="button">Question List </button> <br><br>
+              
+        <!-- <button class="btn btn-info" (click)="getAllFiles('ppt')"  >PPT List</button> 
+        <button class="btn btn-info" (click)="getAllFiles('video')"  >Video List </button>
+        <button class="btn btn-info" (click)="getAllFiles('bothTypes')"  >ppt,video List </button> -->
+        <button class="btn btn-info" (click)="getAllAnswerList()"  >Answer List </button>
+      
+          <!-- <button class="btn btn-info" [routerLink]="'/adminCreation'"     >Create Admin </button> -->
+          <!-- <button class="btn btn-info" (click)="toFileUplodingComp()" >Store PPT </button> -->
+          <!-- <button class="btn btn-info" (click)="activateSubjectStore()"  >Add Subject </button>  -->
+                     
+          <!-- <button class="btn btn-info" [routerLink]="'/facultyCreation'"  >Create Faculty </button>  -->
+          <!-- <button class="btn btn-info" (click)="toFileUplodingComp()" >Store Video </button>  -->
+          <!-- <button class="btn btn-info" (click)="getAllSubjects()" >Get Subjects </button>  -->
+     </div>
+ 
+     <div style="float: right;" *ngIf=" facultyLists || adminLists ||   studentLists ||   pptVideoLists ||   subjectList ||  activateSubjectAdd ||   deleteResult ||  details ||  answerList ||  questionList">
+      <button style="margin-left: 20px;width: 20px;" class="btn btn-info"  style="background-color:orangered;color: white;" (click)="clearOld()" type="reset">Clear</button>
+     </div>
+       
+    
+
+
+
+      <div class=" text-center mt">
+
+      
+      <!-- <div style="padding-top:150px;" *ngIf="isNewAdminData">
+              Share these confidential Admin Records with another , New Admin Only ...! <br>
+             "Admin ID" :: {{newAdminData.aid}}   <br>
+             "Admin Name" :: {{newAdminData.name}}  <br>
+             "User-Name" :: {{newAdminData.username}} <br>
+             "Password" :: {{newAdminData.password}} <br>
+             "Mobile No" :: {{newAdminData.mobileNo}} <br>
+             "Email addr" :: {{newAdminData.email}} <br>
+             "Create dDate":: {{newAdminData.createdDate}}<br>
+      </div> -->
+    
+     <!------------------------------------ -To Show if Any data is Empty or Not Found---------------------> 
+     <!-- <h1  *ngIf="facultyLists.length==0">No Faculty Data Found To Show </h1>
+     <h1  *ngIf="adminLists.length==0">No Admin Data Found To Show </h1>
+     <h1  *ngIf="studentLists.length==0">No Students Data Found To Show </h1>
+     <h1  *ngIf="pptVideoLists.length==0">No Material Data Found To Show </h1> -->
+
+
+ <!-- --------------------------- Faculty Details -------------------------------- -->       
+ <div class="sm-jumbotron"  *ngIf="facultyLists" >  
+  <div>
+    <br>     <br>                                   
+    <h1>Faculty Details</h1>
+   <div    *ngIf="facultyLists" >
+
+      <div style="padding-bottom: 10px;text-align: right;"> 
+             <input type="search" class="form-control"
+                   [(ngModel)]="searchInput.name" 
+                   placeholder="Search by Faculty Name" 
+                   style="width:250px">                        
+      </div>
+ 
+      <div style="padding-bottom: 5px;text-align: left;">
+        <b>Choose number of records : &nbsp;</b> 
+        <select (change)="onTableSizeChange($event)" style="width:55px" >
+                 <option *ngFor="let size of tableSizes">
+                     {{size}}
+                 </option>
+        </select>
+        <b style="padding-left: 580px;"> Total Faculties - {{facultyLists.length}}</b>
+      </div>
+
+      <table  class="table table-dark" align="center"   >
+         <thead   >
+              <tr  >
+                  <th scope="col" >Sr N0  </th>
+                  <th scope="col" (click)="sort('name')">Faculty Name   &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('username')">Faculty Username  &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('id')">Faculty ID  &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('mobileNo')">Mobile no  &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('email')">Email &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('age')">Age &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('subject')">Subject &nbsp;<i class="fa fa-sort"></i></th>
+                  <th scope="col" (click)="sort('deptno')">Deptno &nbsp;<i class="fa fa-sort"></i></th>
+                 <th scope="col" (click)="sort('createdDate')">Created Date &nbsp;<i class="fa fa-sort"></i></th>
+                 <th scope="col" > Status &nbsp; </th>
+                 <th scope="col" > Action &nbsp; </th>
+              </tr>            
+         </thead>
+         <tbody  >
+              <tr *ngFor="let faculty of facultyLists 
+                            | orderBy: orderHeader : isDescOrder 
+                            | filterBy :searchInput  
+                            | paginate :{
+                                         itemsPerPage: tableSize,
+                                         currentPage: page,
+                                         totalItems: count
+                                         }  
+                            ; let i = index"> 
+
+                  <th scope="row">{{i+1}} </th>
+                  <td>{{faculty.name}}</td>
+                  <td>{{faculty.username}}</td>
+                  <td style="text-align: center;">{{faculty.id}}</td>
+                  <td>{{faculty.mobileNo}}</td>
+                  <td>{{faculty.email}}</td>
+                  <td>{{faculty.age}}</td>
+                  <td>{{faculty.subject}}</td>
+                  <td>{{faculty.deptno}}</td>
+                  <td>{{faculty.createdDate}}</td>
+                  <td>{{faculty.status}}</td>
+                  <td style="text-align: center;">
+                    <!-- <button mat-icon-button color="warn" class="delbutn" (click)="deleteById(faculty.id,'faculty')">
+                      <mat-icon>delete</mat-icon>
+                    </button>   -->
+                         <a (click)="deleteById(faculty.id,'faculty')">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a>
+                 
+                    
+                  </td>
+              </tr>
+
+              
+    </tbody>
+  </table>    
+                    
+      <div *ngIf="(facultyLists | filterBy : searchInput).length === 0" style="text-align: center; padding-top:50px">
+        <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+      </div>
+         <!-- for Pagination -->
+         <div>
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+            </pagination-controls>
+        </div> 
+  </div> 
+  
+</div>            
+  </div>
+  
+<!-- ------------------------------------Admin Details ----------------- -->
+<div class="sm-jumbotron"   *ngIf="adminLists">  
+<div>
+<br>     <br>                                   
+<h1 >Admin Details</h1>
+<div   *ngIf="adminLists" >
+            
+    <div style="padding-bottom: 10px;text-align: right;"> 
+       <input type="search" class="form-control"
+          [(ngModel)]="searchInput.name" 
+          placeholder="Search by Admin Name" 
+          style="width:250px">                        
+   </div>
+
+   <div style="padding-bottom: 5px;text-align: left;">
+    <b>Choose number of records : &nbsp;</b> 
+    <select (change)="onTableSizeChange($event)" style="width:55px" >
+             <option *ngFor="let size of tableSizes">
+                 {{size}}
+             </option>
+    </select>
+    <b style="padding-left: 580px;"> Total Admins - {{adminLists.length}}</b>
+  </div>
+
+<table  class="table table-dark" align="center"   >
+<thead   >
+    <tr  >
+        <th scope="col"  >        Sr N0                   </th>
+        <th scope="col" (click)="sort('name')">     Admin Name             &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('username')">Admin Username          &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('id')">Admin ID  &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('mobileNo')">Mobile no               &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('email')">   Email                   &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('age')">     Age                     &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('createdDate')"> Created Date        &nbsp;<i class="fa fa-sort"></i></th>
+       <th scope="col" (click)="sort('i')"> Status</th>
+       <th scope="col" (click)="sort('i')"> Action</th>
+    </tr>
+</thead>
+<tbody  >
+    <tr *ngFor="let admin of adminLists  
+             | orderBy: orderHeader  : isDescOrder
+             | filterBy :searchInput   
+             | paginate :{
+                          itemsPerPage: tableSize,
+                          currentPage: page,
+                          totalItems: count
+                          }    ; 
+               let i = index "> 
+        <th scope="row">{{i+1}} </th>
+        <td>{{admin.name}}</td>
+        <td>{{admin.username}}</td>
+        <td style="text-align: center;">{{admin.id}}</td>
+        <td>{{admin.mobileNo}}</td>
+        <td>{{admin.email}}</td>
+        <td>{{admin.age}}</td>
+        <td>{{admin.createdDate}}</td>
+        <td>{{admin.status}}</td>
+        <td style="text-align: center;">
+            <!-- <button mat-icon-button color="Orange"  *ngIf="admin.name== name"  >
+            <mat-icon >Current</mat-icon>
+          </button> 
+            <button mat-icon-button color="warn"  *ngIf="!(admin.name== name)" (click)="deleteById(admin.id,'admin')">
+            <mat-icon >delete</mat-icon>
+          </button>  -->
+
+           <img  style="height: 30px;" *ngIf="admin.name== name" src="https://cdn-icons-png.flaticon.com/512/5155/5155508.png" alt=""> 
+
+          <a (click)="deleteById(admin.id,'admin')"  *ngIf="!(admin.name== name)">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a>
+                
+        </td>
+      </tr>
+</tbody>
+</table>  
+         
+      <div *ngIf="(adminLists | filterBy : searchInput).length === 0" style="text-align: center; padding-top:50px">
+          <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+      </div>
+         <!-- for Pagination -->
+            <div>
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+              </pagination-controls>
+         </div>                 
+</div>    
+
+
+</div>            
+</div>
+
+<!-- ------------------------------------Student Details ----------------- --> 
+<div class="sm-jumbotron"  *ngIf="studentLists">   
+<div>
+<br>     <br>                                   
+<h1>Student Details</h1>
+<div   *ngIf="studentLists" >
+
+  <div style="padding-bottom: 10px;text-align: right;"> 
+     <input type="search" class="form-control"
+          [(ngModel)]="searchInput.name" 
+          placeholder="Search by Student Name" 
+          style="width:250px">                        
+  </div>
+
+  <div style="padding-bottom: 5px;text-align: left;">
+    <b>Choose number of records : &nbsp;</b> 
+    <select (change)="onTableSizeChange($event)" style="width:55px" >
+             <option *ngFor="let size of tableSizes">
+                 {{size}}
+             </option>
+    </select>
+    <b style="padding-left: 580px;"> Total Students - {{studentLists.length}}</b>
+  </div>
+
+<table  class="table table-dark" align="center"   >
+<thead  >
+    <tr  >
+        <th scope="col" >Sr N0</th>
+        <th scope="col" (click)="sort('name')">Student Name          &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('username')">Student Username  &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('id')">Student ID  &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('mobileNo')">Mobile no         &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('email')">Email                &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('age')">Age                    &nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('createdDate')"> Created Date  &nbsp;<i class="fa fa-sort"></i></th>
+       <th scope="col"  > Status</th>
+       <th scope="col"  > Action</th>
+    </tr>
+</thead>
+<tbody  >
+    <tr *ngFor="let student of studentLists 
+          | orderBy: orderHeader: isDescOrder 
+          | filterBy :searchInput   
+          | paginate :{
+                       itemsPerPage: tableSize,
+                       currentPage: page,
+                       totalItems: count
+                       }    ; 
+            let i = index "> 
+        <th scope="row">{{i+1}} </th>
+        <td>{{student.name}}</td>
+        <td>{{student.username}}</td>
+        <td style="text-align: center;">{{student.id}}</td>
+        <td>{{student.mobileNo}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.age}}</td>
+        <td>{{student.createdDate}}</td>
+        <td>{{student.status}}</td>
+        <td style="text-align: center;">
+            <!-- <button mat-icon-button color="warn" (click)="deleteById(student.id,'student')">
+            <mat-icon >delete</mat-icon>
+          </button>   -->
+
+          <a (click)="deleteById(student.id,'student')">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a>
+          
+        </td>
+      </tr>
+</tbody>
+</table>     
+
+                   
+          <div *ngIf="(studentLists | filterBy : searchInput).length === 0" style="text-align: center; padding-top:50px">
+             <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+          </div>
+
+                <!-- for Pagination -->
+            <div>
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+              </pagination-controls>
+         </div>
+</div>     
+
+</div>            
+</div>   
+
+
+<!--------------------------------------PPT and Video Details Details ----------------- --> 
+<div class="sm-jumbotron"  *ngIf="pptVideoLists" >   
+
+<br>     <br>                                   
+<h1>Material Details</h1>
+<div    *ngIf="pptVideoLists" >
+
+   <div style="padding-bottom: 10px;text-align: right;"> 
+     <input type="search" class="form-control"
+          [(ngModel)]="searchFileInput.fileName" 
+          placeholder="Search by File Name" 
+          style="width:250px">                        
+  </div>
+
+  <div style="padding-bottom: 5px;text-align: left;">
+    <b>Choose number of records : &nbsp;</b> 
+    <select (change)="onTableSizeChange($event)" style="width:55px" >
+             <option *ngFor="let size of tableSizes">
+                 {{size}}
+             </option>
+    </select>   
+     <b style="padding-left: 580px;"> Total Material - {{pptVideoLists.length}}</b>
+
+  </div>  
+
+ 
+
+<table  class="table table-dark" align="center"   >
+ <thead  >
+   
+      <tr  >
+          <th scope="col" >Sr N0</th>
+          <th scope="col" (click)="sort('subject')">    Subject       &nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('type')">       Doc Type      &nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('fileName')">   File Name     &nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('id')">Doc ID  &nbsp;<i class="fa fa-sort"></i></th>
+          <!-- <th scope="col" (click)="sort('fileType')">   File Type     &nbsp;<i class="fa fa-sort"></i></th>  -->
+          <th scope="col" (click)="sort('uploadedRole')">   Uploaded By     &nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('storedDate')"> StoredDate    &nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('updatedDate')">Updated Date  &nbsp;<i class="fa fa-sort"></i></th>
+         <th scope="col"> Status</th>
+         <th scope="col"> Action</th>
+      </tr>
+ </thead>
+ <tbody  >
+      <tr *ngFor="let pv of pptVideoLists  
+                | orderBy: orderHeader : isDescOrder 
+                | filterBy :searchFileInput
+                | paginate :{
+                             itemsPerPage: tableSize,
+                             currentPage: page,
+                             totalItems: count
+                             }    ; 
+                  let i = index "> 
+
+          <th scope="row">{{i+1}} </th>
+          <td >{{pv.subject}}</td>
+          <td>{{pv.type}}</td>
+          <td>{{pv.fileName}}</td>
+          <td style="text-align: center;">{{pv.id}}</td>
+          <td>{{pv.uploadedRole}} - {{pv.uploadedByUsername}}</td>
+          <td>{{pv.storedDate}}</td>
+          <td>{{pv.updatedDate}}</td>
+          <td>{{pv.status}}</td>
+          <td style="text-align: center;"> 
+          
+             <a (click)="deletePVbyId(pv.id,pv.type)">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a> &nbsp;&nbsp;
+            <a [routerLink]="'updateFile/'+pv.id">   <img src="https://cdn-icons-png.flaticon.com/128/2921/2921222.png" alt=""> </a>
+                                
+          
+          </td>
+        </tr>
+</tbody>
+</table>          
+
+          <div *ngIf="(pptVideoLists | filterBy : searchFileInput).length === 0" style="text-align: center; padding-top:50px">
+              <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+          </div>
+
+           <!-- for Pagination -->
+            <div>
+                 <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+                 </pagination-controls>
+            </div>
+</div>   
+ 
+</div>   
+
+
+<!-- ----------------------------------------------subject details----------------------------- -->
+<div class="sm-jumbotron"  *ngIf="subjectList" >   
+
+  <br>     <br>                                   
+  <h1 >Available Subject List</h1>
+  <div  style="width:1200px ;"   *ngIf="subjectList" >
+    
+       <div style="padding-bottom: 10px;align-self: center;"> 
+          <input type="search" class="form-control"
+            [(ngModel)]="searchSubjectInput.subject" 
+            placeholder="Search by Subject" 
+            style="width:250px">                        
+       </div>   
+
+       <div style="padding-bottom: 5px;text-align: left;">
+        <b>Choose number of records : &nbsp;</b> 
+        <select (change)="onTableSizeChange($event)" style="width:55px" >
+                 <option *ngFor="let size of tableSizes">
+                     {{size}}
+                 </option>
+        </select>
+        <b style="padding-left: 580px;"> Total Subjects - {{subjectList.length}}</b>
+      </div>
+
+
+  <table  class="table table-dark" align="center"   >
+   <thead  >
+     
+        <tr  >
+            <th scope="col" >Sr N0</th>
+            <th scope="col" (click)="sort('subject')">Subject       &nbsp;<i class="fa fa-sort"></i></th>
+            <th scope="col" style="text-align: center;"> Action</th>
+        </tr>
+   </thead>
+   <tbody  >
+        <tr *ngFor="let subject of subjectList 
+                   | orderBy: orderHeader : isDescOrder 
+                   | filterBy :searchSubjectInput   
+                   | paginate :{
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count
+                                }    ; 
+                     let i = index "> 
+
+            <th scope="row">{{i+1}} </th>
+            <td>{{subject.subject}}</td>
+            <td style="text-align: center;">
+                       
+               <a (click)="deleteSubject(subject.id)">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a> &nbsp;&nbsp;
+                
+            
+            </td>
+          </tr>
+  </tbody>
+  </table>       
+
+        <div *ngIf="(subjectList | filterBy : searchSubjectInput).length === 0" style="text-align: center; padding-top:50px">
+            <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+        </div>  
+
+                   <!-- for Pagination -->
+            <div>
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+              </pagination-controls>
+            </div>
+  </div>  
+  
+  
+                   
+
+
+
+  </div>  
+            
+ 
+  
+<!-- ================================================================================================================ -->
+
+ <!-- -----------------------------------------------add subject----------------------------- -->
+ <div  class="sm"  *ngIf="activateSubjectAdd">
+  <!-- <h1 class="text-center"  >Store Subject </h1>  -->
+  <br><br>
+     <form  (ngSubmit)="storeSubject()" [formGroup]="registerSubject">
+      <div> 
+        
+         
+        <div class="row">
+           <div class="col mb-3">
+               <label for="firstname" class="form-label" >  Enter Subject </label>
+               <input type="text" class="form-control" id="NAME" formControlName="SUBJECT"   [(ngModel)]="newSubject.subject"  >
+               <div class="form-text text-danger" *ngIf="Subject.errors?.['required'] && (Subject.touched || Subject.dirty)"> 
+                   Subject is Required
+               </div> 
+               <div class="form-text text-danger" *ngIf="Subject.errors?.['noSpecialChar'] && (Subject.touched || Subject.dirty)"> 
+                Special Characters Not allowed
+               </div>
+               <div class="form-text text-danger" *ngIf="Subject.errors?.['pattern'] && (Subject.touched || Subject.dirty) && !Subject.errors?.['noSpecialChar']">
+                   Name should start with Alphabet
+               </div>
+           </div>
+         </div>
+
+         <div class="row">
+          <div class="  text-center">
+              
+                       <div>
+                          <button  class="btn btn-primary" type="submit" [disabled]="registerSubject.invalid">Submit</button> 
+                          <button style="margin-left: 20px" mat-raised-button style="background-color:orangered;color: white;"  type="reset">Reset</button>
+                       
+                        </div>
+                     
+          </div>
+      </div>
+
+      
+     </div>
+
+
+  </form> </div>
+
+<br>
+
+   <!-- ================================================================================================================ -->
+    <!-- -----------------------------------------------AnswerList----------------------------- -->
+   <div class="sm-jumbotron" *ngIf="answerList">
+
+    <br>     <br>                                   
+    <h1>Faculty Given Answer Details</h1>
+    <div    *ngIf="answerList" >
+    
+           <div style="padding-bottom: 10px;text-align: right;"> 
+             <input type="search" class="form-control"
+                [(ngModel)]="searchAnswerInput.answer" 
+                placeholder="Search by Answer" 
+                style="width:250px">                        
+         </div> 
+
+         <div style="padding-bottom: 5px;text-align: left;">
+          <b>Choose number of records : &nbsp;</b> 
+          <select (change)="onTableSizeChange($event)" style="width:55px" >
+                   <option *ngFor="let size of tableSizes">
+                       {{size}}
+                   </option>
+          </select>
+          <b style="padding-left: 580px;"> Total Answers - {{answerList.length}}</b>
+        </div>
+
+    <table  class="table table-dark" align="center"   >
+     <thead  >
+       
+          <tr  >
+              <th scope="col" >Sr N0</th>
+              <th scope="col" (click)="sort('answer')">Answer       &nbsp;<i class="fa fa-sort"></i></th>
+              <th scope="col" (click)="sort('givenId')"> Answerd ID       &nbsp;<i class="fa fa-sort"></i></th>
+             <th scope="col"> Action</th>
+          </tr>
+     </thead>
+     <tbody  >
+          <tr *ngFor="let ans of answerList 
+                      | orderBy: orderHeader : isDescOrder
+                      | filterBy :searchAnswerInput  
+                      | paginate :{
+                                   itemsPerPage: tableSize,
+                                   currentPage: page,
+                                   totalItems: count
+                                   }    ; 
+                        let i = index "> 
+
+              <th scope="row">{{i+1}} </th>
+              <td class="tdCls">{{ans.answer}}</td>
+              <td  >{{ans.givenId}}</td> 
+              <td><a (click)="deleteAnswer(ans.ansId)">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a>    
+              </td>
+            </tr>
+    </tbody>
+    </table>   
+    
+        <div *ngIf="(answerList | filterBy : searchAnswerInput).length === 0" style="text-align: center; padding-top:50px">
+              <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+        </div>
+                  <!-- for Pagination -->
+            <div>
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+              </pagination-controls>
+            </div>
+    </div>            
+     
+                   
+
+
+   </div>
+
+
+    <!-- -----------------------------------------------Questions List----------------------------- -->
+    <div class="sm-jumbotron" *ngIf="questionList">
+
+
+
+      <br>     <br>                                   
+      <h1>Student Asked Question Details</h1>
+      <div    *ngIf="questionList" >
+                 
+                
+       <div style="padding-bottom: 10px;text-align: right;"> 
+         <input type="search" class="form-control"
+           [(ngModel)]="searchQuestionInput.question" 
+           placeholder="Search by Question" 
+          style="width:250px">                        
+        </div> 
+
+        <div style="padding-bottom: 5px;text-align: left;">
+          <b>Choose number of records : &nbsp;</b> 
+          <select (change)="onTableSizeChange($event)" style="width:55px" >
+                   <option *ngFor="let size of tableSizes">
+                       {{size}}
+                   </option>
+          </select>
+          <b style="padding-left: 580px;"> Total Questions - {{questionList.length}}</b>
+        </div>
+
+      <table  class="table table-dark" align="center"   >
+       <thead  >
+         
+            <tr  >
+                <th scope="col" >Sr N0</th>
+                <th scope="col" (click)="sort('question')">Question         &nbsp;<i class="fa fa-sort"></i></th>
+                <th scope="col" (click)="sort('askedId')"> Asked ID         &nbsp;<i class="fa fa-sort"></i></th>
+               <th scope="col"> Action</th>
+            </tr>
+       </thead>
+       <tbody  >
+            <tr *ngFor="let que of questionList 
+                       | orderBy: orderHeader : isDescOrder 
+                       | filterBy :searchQuestionInput 
+                       | paginate :{
+                                    itemsPerPage: tableSize,
+                                    currentPage: page,
+                                    totalItems: count
+                                    }    ; 
+                         let i = index "> 
+                <th scope="row">{{i+1}} </th>
+                <td>{{que.question}}</td>
+                <td>{{que.askedId}}</td> 
+                <td  >  
+                   <a (click)="deleteQuestion(que.ansId)">   <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""> </a>  
+                   
+                </td>
+              </tr>
+      </tbody>
+      </table>       
+      
+              <div *ngIf="(questionList | filterBy : searchQuestionInput).length === 0" style="text-align: center; padding-top:50px">
+                    <p style="color: red;text-align: center; font-size: 16px;"> No Match Found </p>
+              </div>
+
+
+             <!-- for Pagination -->
+            <div>
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">             
+              </pagination-controls>
+             </div>
+      </div>            
+                
+                   
+
+
+  
+     </div>
+
+
+
+
+
+    </div>
+  </div>
+  
+<br><br><br><br><br><br><br><br>
+
+
+
+

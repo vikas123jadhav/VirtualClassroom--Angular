@@ -1,0 +1,135 @@
+.intro-2{
+
+  background: url("https://tse2.mm.bing.net/th/id/OIP.eay4VCetv7Rr5ElL8UF9SAHaD0?w=304&h=179&c=7&r=0&o=5&dpr=1.25&pid=1.7")no-repeat center center;
+
+ width: 100%;
+
+  background-size: cover;
+
+min-height: 100vh;
+
+overflow: hidden
+
+/* opacity: 0.5; */
+ 
+}
+
+ul{
+     list-style: none;
+     width: 130px;
+      font-size: 15px;
+      text-align: right;
+      margin-left:10px;
+      padding-top: 2px;
+
+      
+  /* display: inline; */
+  /* float: left; */
+}
+
+a{
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.optText{
+  font-size: 15px;
+}
+
+
+ .sm-jumbotron{
+    /* padding-top:50px; */
+     padding-left: 80px;
+    padding-right: 80px;
+   }
+  
+   .sm{
+    padding-top:150px;
+    padding-left: 250px;
+     padding-right: 80px;
+   }
+   .full-width{
+    
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+label{
+    text-align: left;
+
+}
+
+/* input{
+  width:200px;
+  padding-left: 200px;
+} */
+   .container{
+    padding-left: 250px;
+    padding-top: 70px;
+     /* text-align: center;  */
+}  
+   td {
+      padding-top: 13px;
+      padding-bottom: 13px;
+      padding-left: 8px;
+      text-align: left;
+      text-transform: capitalize;
+
+      
+    } 
+
+    .tdCls{
+      text-align: left;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      padding-left: 8px; 
+      text-transform: capitalize;
+    }
+    /* .tdClass{
+      /* height: 280px;  * /
+      width: 100px; 
+      overflow: hidden;
+      white-space: nowrap;
+    } */
+  
+    th{
+      text-align: left;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      padding-left: 15px;
+    }
+   
+     table{
+      width: 1200px;
+      font-size: 13px;
+      
+    } 
+     
+   h1{
+    width:1200px;
+    text-align: center;
+    color: maroon;
+   }
+   
+
+    button{
+      width: 130px;
+      font-size: 15px;
+      text-align: left;
+      margin-left:10px;
+      text-align: center;
+      
+    }
+  
+    .delbutn{ 
+        width: 100px;
+        width: 50px;
+    }
+  
+    img{
+      height: 20px;
+      
+  }
+  
+    

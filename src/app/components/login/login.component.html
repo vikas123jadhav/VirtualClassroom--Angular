@@ -1,0 +1,73 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+
+      <div *ngIf="!loggedIn">
+        <div class="row" style="margin-top: 20px ;">
+            <div class="col-md-6 offset-md-3">
+                <div class="  text-center">
+                       <img src="../../../assets/icons8-user-100.png" alt="">
+                  </div>
+                  <h1 class="text-center"> <b> Login Here..! </b></h1>
+                
+
+                 <form (ngSubmit)="onSubmit()">
+   
+                                    
+                  <!--username field  --> 
+                  <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>User Name</mat-label>
+                      <input
+                      [(ngModel)]="userLoginData.username"
+                      name="username"
+                       required matInput placeholder="Enter Here">
+                       <mat-hint>Valid User Name!!</mat-hint>
+                    </mat-form-field>
+
+                    <br><br>
+                     
+                  <!-- username field  --> 
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>User Password</mat-label>
+                      <input 
+                      [(ngModel)]="userLoginData.password"
+                      name="password"
+                      type="password" required matInput placeholder="Enter Here">
+                    </mat-form-field>
+  
+                    <div class="  text-center"> 
+                      <button type="submit" mat-raised-button color="primary"  >Login</button> &nbsp; &nbsp;
+                      <button style="margin-left:10px" type="reset" class="btn btn" style="background-color:orangered;color: white;">Reset</button>
+                    </div>
+                    
+                  <br><h3 style="text-align: center;size: 10px;"><a   [routerLink]="'/registerStudent'" >Don't have Account, Signup here</a></h3>
+                 </form>
+
+                 <br> <p style="color: red; text-align: center;" *ngIf="result"><b>{{result}} </b> </p>
+                 <br>
+            
+           
+              </div>
+  
+          </div>
+        </div>
+
+        <!-- ---------------------------------------------------- -->
+        <div *ngIf="loggedIn" onload="toDashBoard()"     style=" text-align:center;padding-top: 200px;">
+                   <img src="https://cdn-icons-png.flaticon.com/128/1048/1048949.png" alt=""
+                    style="border-radius: 50%; text-align:center;height: 200px;">
+                                 &nbsp;&nbsp;
+                    <img src="https://th.bing.com/th/id/OIP.IDGxd0uGiaZyaHlxk3FeDgHaDP?w=309&h=153&c=7&r=0&o=5&dpr=1.25&pid=1.7" alt=""
+                    style="border-radius: 10%; text-align:center;height: 150px;">
+                    
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+  
+  </div>

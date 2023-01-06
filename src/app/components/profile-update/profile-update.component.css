@@ -1,0 +1,74 @@
+.full-width{
+    
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+ 
+ 
+img{
+    height: 130px;
+}
+
+h1{
+    padding-top: 10px;
+}
+
+/* .row{
+      padding-top: 10px;
+      padding-bottom: 10px;
+} */
+
+
+.container{
+    padding-left: 250px;
+    padding-top: 50px;
+    /* text-align: center; */
+}  
+
+.call{
+    padding-left: 250px;
+    padding-top: 100px;
+    text-align: center;  
+}
+
+.profile-image{
+
+    max-width: 200px;
+
+    max-height: 200px;
+    align-self: center;
+    border: 2px solid black;
+    
+    border-radius: 50%;
+
+}
+
+.form-control{
+    border-color: rgb(121, 108, 108);
+}
+
+
+.form-label{
+    text-align: left;
+}
+
+/* .table{
+
+    width: 500px;  
+    
+} */
+
+
+/* .table tr td{
+
+ padding: 10px 10px;
+width: 200px;
+ border-collapse: collapse;
+ 
+}  */
+
+.cap{
+    text-transform: capitalize;
+
+}

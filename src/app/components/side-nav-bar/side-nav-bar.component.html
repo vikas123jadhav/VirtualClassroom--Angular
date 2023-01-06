@@ -1,0 +1,98 @@
+<div class="side-nav-content">
+    <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}">
+        <li class="nav-list-item " >
+            <i class="fa-solid fa-house"></i>
+            <span *ngIf="sideNavStatus">
+                <a   routerLink='home'>Home</a>
+            </span>
+        </li>
+         
+         
+        <li *ngIf="loggedIn" class="nav-list-item " >
+            <i class="fa-solid fa-square"></i>
+            <span *ngIf="sideNavStatus">
+                <a *ngIf="role=='admin'"  href="adminDashboard">DashBoard</a> 
+                <a *ngIf="role=='faculty'"   href="facultyDashboard">DashBoard</a> 
+                <a *ngIf="role=='student'" href="studentDashboard" >DashBoard</a>
+            </span>
+        </li>
+
+        <li class="nav-list-item  " >
+            <i class="fa-solid fa-chart-line"></i>
+            <span *ngIf="sideNavStatus">
+                <a   routerLink='uploadRecords'>Record Charts</a>
+            </span>
+        </li>
+
+        <li class="nav-list-item " >
+            <i class="fa-solid fa-box"></i>
+            <span *ngIf="sideNavStatus">
+                <a  >Subjects</a>
+            </span>
+        </li>
+
+        <!-- <li class="nav-list-item " >
+            <i class="fa-solid fa-chart-line"></i>
+            <span *ngIf="sideNavStatus">
+                <a   routerLink='uploadRecords'>Analytics</a>
+            </span>
+        </li>
+        -->
+        
+        
+        
+
+        <li class="nav-list-item  " >
+            <i class="fa-solid fa-gear"></i>
+            <span *ngIf="sideNavStatus">
+                <a   routerLink='home'>Setting</a>
+            </span>
+        </li>
+
+        <li class="nav-list-item  " >
+            <i class="fa-solid fa-circle-info"></i>
+            <span *ngIf="sideNavStatus">
+                <a   href='https://about.solugenix.com/'>About</a>
+            </span>
+        </li>
+
+        <li class="nav-list-item  " >
+            <i class="fa-solid fa-phone"></i>
+            <span *ngIf="sideNavStatus">
+                <a   href='https://www.solugenix.com/contact'>Contact</a>
+            </span>
+        </li>
+        <li class="nav-list-item  " *ngIf="loggedIn && role=='student'">
+            <i class="fa-solid fa-question"></i>
+              
+               <!-- <li class="nav-item dropdown px-4"  >           -->
+                   <a class="nav-link dropdown-toggle nav-item dropdown " href="#" role="button" 
+                      data-bs-toggle="dropdown"  *ngIf="sideNavStatus">
+                           Question
+                   </a >
+                   <ul class="dropdown-menu dropdown-menu-dark">
+                       <li class="optText"><a class="dropdown-item"  [routerLink]="'toQuestionAnswer/askQuestion'"  >Ask Questions</a></li>
+                       <li class="optText"><a class="dropdown-item" [routerLink]="'toQuestionAnswerStudent/askedQuestion'"  >Asked Questions</a></li> 
+                  </ul>
+             
+              <!-- <li> -->
+       </li>
+     
+       <li class="nav-list-item  " *ngIf="loggedIn && role=='faculty'">
+           <i class="fa-solid fa-question"></i>
+             
+              <!-- <li class="nav-item dropdown px-4"  >           -->
+                  <a class="nav-link dropdown-toggle nav-item dropdown " href="#" role="button"
+                     data-bs-toggle="dropdown" *ngIf="sideNavStatus">
+                          Question
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                      <li class="optText"><a class="dropdown-item"  [routerLink]="'toQuestionAnswer/answerQuestions'"  >View Questions</a></li>
+                      <li class="optText"><a class="dropdown-item" [routerLink]="'toQuestionAnswerFaculty/answeredQuestion'"  >Answered Questions</a></li> 
+                 </ul>
+            
+             <!-- <li> -->
+      </li>
+   </ul>
+</div>
+

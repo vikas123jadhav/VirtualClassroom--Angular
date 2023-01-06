@@ -1,0 +1,30 @@
+.full-width{
+    
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+ 
+img{
+    height: 100px; 
+}
+
+.container{
+    padding-left: 250px;
+    padding-top: 70px;
+    /* text-align: center; */
+}  
+
+
+
+h1{
+    padding-top: 10px;
+}
+
+
+
+/* .container{
+    padding-top: 10px;
+    align-items: center;
+} */
+

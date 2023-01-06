@@ -1,0 +1,94 @@
+<div class="container bootstrap-wrapper" style="padding-top: 100px;padding-left: 100px;" >
+    <div class=" text-center mt"> 
+       <h1 style="text-align: center;"> Welcome to   Panel</h1>
+       <div style="float: left; margin-left: 100px;">
+         
+         <button mat-raised-button (click)="getAllFiles('ppt')" color="accent">Get PPT's </button> 
+         <button mat-raised-button (click)="getAllFiles('video')" color="accent">Get Video's </button>
+         <!-- <button mat-raised-button  color="accent">Get Video's </button> -->
+
+         <button mat-raised-button (click)="getAllFiles('bothTypes')" color="accent">Get PPT & Video </button>
+       </div>
+
+       <div>
+
+      </div>
+
+        <!--------------------------------------PPT and Video Details Details ----------------- --> 
+       
+        <!-- <video width="320" height="240" controls>
+          <source src="C:\Users\VikasNandakumarJadha\Downloads\uploads\Pexels Videos 1580505.mp4" type="video/mp4">
+          <source src="C:\Users\VikasNandakumarJadha\Downloads\uploads\Pexels Videos 1580505.mp4" type="video/ogg">
+          Your browser does not support the video tag.
+        </video> -->
+
+        <!-- <div  >
+          <video width="400" controls>
+               <source src="C:\Users\VikasNandakumarJadha\Downloads\uploads\Pexels Videos 1580505.mp4" type="video/mp4">Your browser does not support HTML5 video.
+          </video>
+       </div>
+        <img   [src]="url" alt="video"> -->
+
+        
+  <div class="sm-jumbotron"  *ngIf="pptVideoLists" >  
+    <div class="panel-body">         
+      <div *ngIf="fileStatus.status==='progress'">
+        <div class="progress">
+          <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+              {{ fileStatus.requestType }} {{ fileStatus.percent }} 
+            </div>
+        </div>
+      </div>
+
+      <br>     <br>                                   
+      <h1 style="color: maroon;text-align: center;">Material Details</h1>
+     <div    *ngIf="pptVideoLists" >
+      
+      <table  class="table table-dark" align="center"   >
+           <thead  >
+             
+                <tr  >
+                    <th scope="col" >Sr N0</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Doc Type</th>
+                    <th scope="col"> File Name</th>
+                    <th scope="col">File Type</th> 
+                    <th scope="col">StoredDate</th>
+                    <th scope="col"> Updated Date</th>
+                   <th scope="col"> Status</th>
+                   <th scope="col"> Action</th>
+                </tr>
+           </thead>
+           <tbody  >
+                <tr *ngFor="let pv of pptVideoLists  ; let i = index"> 
+                    <th scope="row">{{i+1}} </th>
+                    <td>{{pv.subject}}</td>
+                    <td>{{pv.type}}</td>
+                    <td>{{pv.fileName}}</td>
+                    <td>{{pv.fileType}}</td>
+                    <td>{{pv.storedDate}}</td>
+                    <td>{{pv.updatedDate}}</td>
+                    <td>{{pv.status}}</td>
+                    <td style="text-align: center;">
+                       
+                      <a   (click)="download(pv.fileName)">  <img src="https://cdn-icons-png.flaticon.com/512/2381/2381981.png" alt="">   </a>
+                       
+                      <!-- <a   (click)="displayVideo(pv.fileName)">  Display </a> -->
+                                          
+                    
+                    </td>
+                   
+                  </tr>
+
+                   
+                  <!-- <div *ngIf="showDisplayBlock">
+                        <img   [src]="url" alt="video">
+                  </div> -->
+      </tbody>
+    </table>    
+    
+    
+
+    <br>  <br>  <br>  <br>  <br>  <br>  <br>  <br>
+    </div>
+</div>

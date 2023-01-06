@@ -1,0 +1,40 @@
+<div class="bootstap-wrapper ">
+     <h1 class="text-center" style="padding-top: 100px;padding-left: 190px; "> <b>Welcome to My Virtual-Classroom </b></h1>
+
+    <!-- <div class="container text-center mt" >
+        
+       
+    </div> -->
+</div>  
+
+ 
+
+<div *ngIf="images && images.length > 0 && autoSlide" class="carousel-container"  [ngClass]="{'display-area-shrink':!sideNavStatus}" >
+    
+     <img *ngFor="let image of images; let i=index"
+          [src]="image.imageSrc" [alt]="image.imageAlt"
+          [ngClass]="{'image-active': selectedIndex === i }"
+          
+     >
+
+     <div *ngIf="indicators"  class="carousel-dot-container">
+          <span *ngFor="let dot of images ; let i=index" 
+               class="dot"
+               [ngClass]="{'active': selectedIndex === i}"
+               (click)="selectImage(i)"
+               >
+            
+          </span>
+     </div>
+  
+     <button  *ngIf="contols"  class="btn-carousel btn-prev" (click)="onPrevClick()">
+        <i class="fas fa-arrow-circle-left icon-carousel icon-prev"></i>
+     </button> 
+ 
+
+     <button  *ngIf="contols"  class="btn-carousel btn-next" (click)="onNextClick()">
+        <i class="fas fa-arrow-circle-right icon-carousel icon-next"></i>
+     </button> 
+
+</div>
+ 

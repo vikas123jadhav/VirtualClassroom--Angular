@@ -1,0 +1,67 @@
+ 
+
+  <div class="container text-center">
+    <!-- <img src="https://img.freepik.com/free-photo/fun-3d-cartoon-casual-character_183364-80985.jpg?size=626&ext=jpg&ga=GA1.2.1290743716.1663775071"
+    alt=""
+    class="profile-image"> -->
+    <img src="https://cdn-icons-png.flaticon.com/256/4825/4825087.png"
+    alt=""
+    class="profile-image">
+    <br><br>
+ 
+    <h1 style="color: purple; font-size:20px"> <b>Your Profile </b></h1>
+    <br><br>
+    <table class="table" align="center" >
+        
+        <tbody style="text-align: left; left: 20px;">
+          <tr>
+            <th scope="row">Name</th>
+            <td class="cap">{{user.name}}</td>
+           </tr>
+           <tr>
+            <th scope="row">User-Name</th>
+            <td>{{user.username}}</td>
+           </tr>
+           <tr>
+            <th scope="row">Age</th>
+            <td>{{user.age}}</td>
+           </tr>
+            
+           <tr>
+            <th scope="row">Contact No</th>
+            <td class="cap">{{user.mobileNo}}</td>
+           </tr>
+           <tr>
+            <th scope="row">Email</th>
+            <td>{{user.email}}</td>
+           </tr>
+           <tr>
+            <th scope="row">Status</th>
+            <td class="cap">{{user.status}}</td>
+           </tr>
+           <tr>
+            <th scope="row">Role</th>
+            <td class="cap">{{user.role}}</td>
+           </tr>
+           <tr *ngIf="user.subject">
+            <th scope="row">Subject</th>
+            <td class="cap">{{user.subject}}</td>
+           </tr>
+           <tr *ngIf="user.deptno">
+             <th scope="row">Deptno</th>
+              <td class="cap">{{user.deptno}}</td>
+           </tr>
+           
+         
+        </tbody>
+      </table>
+
+      <mat-card-actions class="text-center">
+        <button mat-raised-button color="primary" [routerLink]="'updateProfile/'+user.username"> UPDATE UR PROFILE</button>
+       </mat-card-actions>
+
+
+
+       
+       <br><br><br><br><br><br><br><br>
+  </div>

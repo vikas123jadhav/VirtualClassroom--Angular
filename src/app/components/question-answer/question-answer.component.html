@@ -1,0 +1,235 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+
+        <br><br> <br>
+        <!-- For student to ask questions -->
+        <div *ngIf="activateQuestionField">
+            <form [formGroup]="askform" (ngSubmit)="questionSubmit()">
+                <div class="row">
+                    <!--  <div class="col mb-5">
+                                   <label for="question" class="form-label"> Enter Subject</label>
+                                   <input type="text" class="form-control"  required  name="Subject" id="Subject" formControlName="SUBJECT"  [(ngModel)]="question.subject" >
+                          
+
+                                      <div class="form-text text-danger" *ngIf="Subject.errors?.['required'] && (Subject.touched || Subject.dirty)"> 
+                                          Subject is Required
+                                      </div>
+                                     
+                                     
+                                      <div class="form-text text-danger" *ngIf="Subject.errors?.['minlength'] && (Subject.touched || Subject.dirty)"> 
+                                          Subject should be between 2-20 Chars only 
+                                      </div>
+                                      <div class="form-text text-danger" *ngIf="Subject.errors?.['pattern'] && (Subject.touched || Subject.dirty)">
+                                          Subject Must have only Alphabets
+                                      </div>
+                            </div> -->
+
+
+
+                    <div class="row">
+                        <div class="col mb-5">
+                            <label for="question" class="form-label"> Enter Subject</label>
+                            <select class="form-control" name="Subject" id="Subject" formControlName="SUBJECT"
+                                [(ngModel)]="question.subject">
+                                <option value="" disabled selected>Choose Subject</option>
+                                <option *ngFor="let sub of subjectList">
+                                    {{sub.subject}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-text text-danger" *ngIf="Subject.errors?.['required'] &&  Subject.touched  ">
+                            *subject required
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="question" class="form-label"> Enter Question</label>
+                            <textarea class="form-control" required name="Question" id="Question"
+                                formControlName="QUESTION" [(ngModel)]="question.question"
+                                style="height:200px;width: 880px;">
+                                          </textarea>
+
+                            <!-- <input type="text" class="form-control"  required  name="Question" id="Question" formControlName="QUESTION"  [(ngModel)]="roleBasedQA" 
+                                                style="height:200px;"
+                                          > -->
+
+                            <div class="form-text text-danger"
+                                *ngIf="QUation.errors?.['required'] && (QUation.touched || QUation.dirty)">
+                                Question is Required
+                            </div>
+                            <div class="form-text text-danger"
+                                *ngIf="QUation.errors?.['minlength'] && (QUation.touched || QUation.dirty)">
+                                Question should be between 2-150 Chars only
+                            </div>
+                            <div class="form-text text-danger"
+                                *ngIf="QUation.errors?.['maxlength'] && (QUation.touched || QUation.dirty)">
+                                Question should be between 2-150 Chars only
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="  text-center">
+
+                            <div>
+                                <br><br>
+                                <button class="btn btn-primary" type="submit" [disabled]="askform.invalid">Ask </button>
+                                &nbsp;&nbsp;
+                                <button type="reset" class="btn btn"
+                                    style="background-color:orangered;color: white;">Reset</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </form>
+        </div>
+
+
+
+
+        <!-------------------------- List of Questions and Answered asked by Student ------------------------------------->
+        <div *ngIf="studentAskedQue">
+            <h1 style="text-align:center; color: darkorchid;"><b>List of Questions asked by You and Answered List </b>
+            </h1><br>
+            <div *ngFor="let qa of studentQuestionList  ; let i = index">
+                <h2 style="text-align: right;">{{qa.subject}}</h2>
+                <p> <b>Q{{i+1}}. {{qa.question}} </b></p>
+
+                <div *ngIf="qa.answerList=='' || qa.answerList==null">
+                    <p style="color: firebrick;"> <b style="color:black"> Ans :-</b> Not Answered</p>
+                </div>
+
+                <div *ngFor="let ans of qa.answerList ; let j=index">
+                    <b style="color:black"> Ans :-</b> {{j+1}}. {{ans.answer}}
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        
+        <div *ngIf="studentQuestionList==''">
+            <h1 style="text-align: center;padding-top: 100px;color:red;"> "You Have Not Asked any Questions Yet ..!"</h1>
+        </div>  
+
+        <!-- ==============================================================Faculty  Role ==========================================         -->
+        <!-- List of Questions Answered by Faculty -->
+        <div *ngIf="facultyAnsQue">
+            <h1 style="text-align:center; color: darkorchid;"><b>List of Questions 'Answered' by You and Answered List
+                </b> </h1><br>
+            <h2 style="text-align: center;">Subject :: <b>{{user.subject}} </b></h2> <br>
+            <div *ngFor="let qa of facultyAnsweredQueList  ; let i = index">
+
+                <p> <b>Q{{i+1}}. {{qa.question}} </b></p>
+                <div *ngFor="let ans of qa.answerList ; let j=index">
+                    <p *ngIf="ans.givenId==user.id"> <b style="color:black"> Ans :-</b> {{j+1}}. {{ans.answer}} </p>
+                    <!-- &nbsp; &nbsp;&nbsp; &nbsp;    <p *ngIf="ans.givenId==777" > {{j+1}}. {{ans.answer}} </p>  -->
+
+                </div>
+                <br>
+                <hr> <br>
+            </div>
+        </div>
+
+        <div *ngIf="facultyAnsweredQueList==''">
+            <h1 style="text-align: center;padding-top: 100px;color:red;"> "You Have Not Answered any Questions Yet ..!"</h1>
+        </div>
+
+        <!-- displaying List of Questions for Faculty based on "Subject" -->
+        <div *ngIf="activateAnswerField">
+            <h1 style="text-align:center; color: darkorchid;"><b> Here are List of Questions Related to ur Subject-
+                    {{user.subject}} . You can Answer </b></h1> <br>
+            <div *ngFor="let qList of questionListFaculty; let i=index">
+                <p><b>Q{{i+1}}. {{qList.question}}</b></p>
+
+
+                <div *ngIf="qList.answerList!='' || qList.answerList.length!=0">
+                    <div *ngFor="let ans of qList.answerList ; let j=index">
+                        <b style="color:black"> Ans :-</b> {{j+1}}. {{ans.answer}} &nbsp;&nbsp; <b
+                            *ngIf="ans.givenId==user.id" style="color: rgb(18, 150, 18);float: right;"><i>- By You</i></b>
+                    </div>
+                </div>
+
+                <div *ngIf="qList.answerList=='' || qList.answerList==null">
+                    <p style="color: firebrick;"><b style="color:black"> Ans :-</b> No One Answered this Question.</p>
+                </div>
+
+
+                <div style="text-align: right;">
+                    <button style="text-align: right;" (click)="showFacultyAnswerBlock(i)" type="submit"
+                        class="btn btn-primary"> Answer</button>
+                </div>
+
+                <div *ngIf="showFacultyAnswer &&  i==anwIndexBlock">
+
+                    <form (ngSubmit)="answerSubmit(i)">
+
+                        <div class="row">
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="question" class="form-label"> Enter Answer :-</label>
+                                    <textarea class="form-control" required name="Answer" id="Answer"
+                                        [(ngModel)]="facAnswer" style="height:100px;width: 880px;">
+                                               </textarea>
+
+                                    <!-- <input type="text" class="form-control"  required  name="Question" id="Question" formControlName="QUESTION"  [(ngModel)]="roleBasedQA" 
+                                                     style="height:200px;"
+                                               > -->
+
+                                    <!-- <div class="form-text text-danger" *ngIf="Answer.errors?.['required'] && (Answer.touched || QUation.dirty)"> 
+                                                      Question is Required
+                                                  </div>
+                                                  <div class="form-text text-danger" *ngIf="Answer.errors?.['minlength'] && (Answer.touched || QUation.dirty)"> 
+                                                      Question should be between 2-150 Chars only 
+                                                  </div>
+                                                  <div class="form-text text-danger" *ngIf="Answer.errors?.['maxlength'] && (Answer.touched || QUation.dirty)"> 
+                                                      Question should be between 2-150 Chars only 
+                                                  </div> -->
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="  text-center">
+
+                                    <div>
+                                        <br>
+                                        <button class="btn btn-primary" type="submit">Submit </button>
+                                        <button style="margin-left: 20px" class="btn btn-danger"
+                                            type="reset">Reset</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <hr>
+            </div>
+
+            
+
+        </div>
+
+        <div *ngIf="questionListFaculty==''">
+            <h1 style="text-align: center;padding-top: 100px;color:red;"> "No questions are there Related to ur Subject- {{user.subject}} <b></b> ..!"</h1>
+        </div>
+
+    </div>
+
+
+    <br><br><br><br><br><br><br><br>
+</div>

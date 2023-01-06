@@ -1,0 +1,50 @@
+nav{
+    height: 100%;
+}
+
+.side-nav-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.side-nav-button:hover{
+   background-color: rgba(240, 248, 255, 0.67);
+   border-radius: 30%;
+}
+
+.optText{
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+.select{
+    /* height: 10px; */
+    font-size: 15px;
+    width: 100px;
+}
+
+.opt{
+    color: black;
+}
+.example-spacer{
+    flex:1 1 auto;
+}
+
+.stup {
+	text-decoration: none;
+	color: white;  
+    font-size: 15px;
+}
+
+a{
+    text-decoration: none;
+}
+

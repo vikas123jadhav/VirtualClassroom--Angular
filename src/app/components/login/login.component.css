@@ -1,0 +1,35 @@
+.full-width{
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.container{
+  padding-left: 250px;
+  padding-top: 70px;
+  /* text-align: center; */
+}  
+
+img{
+    height: 150px;
+  }
+  
+  h1{
+    padding-top: 10px;
+  }
+  
+  input{
+    background-color: rgba(128, 128, 128, 0.341);  
+    color: black;
+  }
+/* 
+.row{
+     background-color: white;
+     width: 800px;
+     align-self: center;
+     
+} */
